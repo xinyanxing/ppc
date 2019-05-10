@@ -5,15 +5,20 @@ module.exports = {
     es6: true,
     node: true
   },
-  parser: 'babel-eslint',
+  extends: [
+    'eslint-config-alloy/react',
+    'eslint-config-alloy/typescript',
+  ],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
+    "project": "./tsconfig.json",
     ecmaFeatures: {
       experimentalObjectRestSpread: true,
       jsx: true
     },
     sourceType: 'module'
   },
-  plugins: ['react'
+  plugins: ['react','@typescript-eslint'
   ],
   root: true,
   rules: {
@@ -34,6 +39,7 @@ module.exports = {
     //强制分号
     semi: ['error', 'always'
     ],
+    "@typescript-eslint/rule-name": "error",
     //防止错误for循环
     'for-direction': 'error',
     //不许更改const定义过的变量
