@@ -2,9 +2,7 @@
 import React from 'react';
 // import 'antd/dist/antd.min.css';
 
-
 // class Analysisprocessing extends React.Component {
-
 
 //   componentWillMount() { }
 
@@ -21,7 +19,6 @@ import React from 'react';
 
 //   render() {
 
-
 //     return (
 //       <div>ssssffff</div>
 
@@ -37,15 +34,19 @@ import React from 'react';
 
 // export const Hello = (props: HelloProps) => <h1>Hello from{props.compiler} and {props.framework}!</h1>
 //第二种写法
-enum Color { red = 1, Green, Blue }
+enum Color {
+  red = 1,
+  Green,
+  Blue
+}
 export interface HelloProps {
   compiler: string;
   framework: string;
-  curColor: Color
+  curColor: Color;
 }
 
 interface labelvalue {
-  label: string
+  label: string;
 }
 interface SquareConfig {
   color?: string;
@@ -54,17 +55,12 @@ interface SquareConfig {
 }
 //函数接口类型
 interface SearchFn {
-  (source: string, subString: string): boolean
+  (source: string, subString: string): boolean;
 }
 //索引类型
 interface StringArray {
   [index: number]: string;
 }
-
-
-
-
-
 
 //类类型
 //class 中constructor方法，是构造方法
@@ -72,28 +68,27 @@ interface StringArray {
 //创建一个函数  自动获得一个prototype属性,该属性指向函数的原型对象，所有原型对象都会自动获得一个constructor属性，该属性是指向prototype所在函数的指针
 // ClockConstructor为构造函数所用
 interface ClockConstructor {
-  new(hour: number, minute: number): ClockInterface;
+  new (hour: number, minute: number): ClockInterface;
 }
 // ClockInterface 为实例方法所用。
 interface ClockInterface {
-  tick(): any
+  tick(): any;
 }
 
 class DigitalClock implements ClockInterface {
-  constructor(h: number, m: number) { }
-  tick() {
-  }
+  constructor(h: number, m: number) {}
+  tick() {}
 }
 
-function createClock(ctor: ClockConstructor, hour: number, minute: number): ClockInterface {
+function createClock(
+  ctor: ClockConstructor,
+  hour: number,
+  minute: number
+): ClockInterface {
   return new ctor(hour, minute);
 }
 
-
 let digital = createClock(DigitalClock, 12, 17);
-
-
-
 
 //接口继承
 interface Shape {
@@ -103,48 +98,40 @@ interface Shape {
 interface Square extends Shape {
   sideLength: number;
 }
-//当你在TypeScript里使用JSX时，只有as语法断言是被允许的。 
-// let square = <Square>{}; 
-let square = ({} as Square)
-square.color = 'red'
-
-
+//当你在TypeScript里使用JSX时，只有as语法断言是被允许的。
+// let square = <Square>{};
+let square = {} as Square;
+square.color = 'red';
 
 //混合类型
 interface Counter {
   (start: number): string;
   interval: number;
-  reset(): void
+  reset(): void;
 }
 
 function getCounter(): Counter {
-  let counter = (function (start: number) {
-    let sss = 'dd'
-  } as Counter)
+  let counter = function(start: number) {
+    let sss = 'dd';
+  } as Counter;
   counter.interval = 123;
-  return counter
+  return counter;
 }
 
-let c = getCounter()
-
-
-
-
+let c = getCounter();
 
 //类
 class Greeter {
   greeting: string;
   constructor(message: string) {
-    this.greeting = message
+    this.greeting = message;
   }
   greet() {
     return 'hello,' + this.greeting;
   }
-
 }
 
-let greeter = new Greeter('消息消息消息')
-
+let greeter = new Greeter('消息消息消息');
 
 //类的继承
 // class Animal {
@@ -165,7 +152,6 @@ let greeter = new Greeter('消息消息消息')
 
 // }
 
-
 // class Horse extends Animal {
 //   constructor(name: string) { super(name); }
 //   curtype: string = 'cc';
@@ -175,21 +161,23 @@ let greeter = new Greeter('消息消息消息')
 //   }
 // }
 
-
 // let sam = new Snake("Sammy the Python");
 // let tom: Animal = new Horse("Tommy the Palomino");
-
-
 
 //类的私有
 class Animal {
   private name: string;
   protected typename: string;
-  constructor(theName: string, typename: string) { this.name = theName; this.typename = typename }
+  constructor(theName: string, typename: string) {
+    this.name = theName;
+    this.typename = typename;
+  }
 }
 
 class Rhino extends Animal {
-  constructor() { super("Rhino", 'aa'); }
+  constructor() {
+    super('Rhino', 'aa');
+  }
   rich() {
     // console.log('受保护的Rhino ' + this.typename)
   }
@@ -197,13 +185,14 @@ class Rhino extends Animal {
 
 class Employee {
   private name: string;
-  constructor(theName: string) { this.name = theName; }
+  constructor(theName: string) {
+    this.name = theName;
+  }
 }
 
-let animal = new Animal("Goat", 'bb');
+let animal = new Animal('Goat', 'bb');
 let rhino = new Rhino();
-let employee = new Employee("Bob");
-
+let employee = new Employee('Bob');
 
 //类的静态属性
 //静态成员，这些属性存在于类本身上面而不是类的实例上
@@ -214,14 +203,13 @@ class Grid {
   }
 }
 
-let grid1 = new Grid(20)
+let grid1 = new Grid(20);
 
 //抽象类
 //抽象类做为其它派生类的基类使用。 它们一般不会直接被实例化,可以通过继承然后实例化子类
 
 abstract class Department {
-  constructor(public name: string) {
-  }
+  constructor(public name: string) {}
 
   printName(): void {
     // console.log('Department name: ' + this.name);
@@ -230,9 +218,7 @@ abstract class Department {
   abstract printMeeting(): void; // 必须在派生类中实现
 }
 
-
 class AccountingDepartment extends Department {
-
   constructor() {
     super('Accounting and Auditing'); // 在派生类的构造函数中必须调用 super()
   }
@@ -253,19 +239,13 @@ department.printName();
 department.printMeeting();
 // department.generateReports(); // 错误: 方法在声明的抽象类中不存在
 
-
-
-
-
-
 class Greeters {
-  static standardGreeting = "Hello, there";
+  static standardGreeting = 'Hello, there';
   greeting: string = '';
   greet() {
     if (this.greeting) {
-      return "Hello, " + this.greeting;
-    }
-    else {
+      return 'Hello, ' + this.greeting;
+    } else {
       return Greeters.standardGreeting;
     }
   }
@@ -280,23 +260,15 @@ class Greeters {
 // }
 //这个函数会在我们使用 new创建类实例的时候被调用
 
-
-
 //类定义会创建两个东西：类的实例类型和一个构造函数。因为类可以创建出类型，所以你能够在允许使用接口的地方使用类。
-
-
 
 //typeof Greeter，意思是取Greeter类的类型，而不是实例的类型。
 //这个类型包含了类的所有静态成员和构造函数
 let greeterMaker: typeof Greeters = Greeters;
 
-
-
 let greeter2: Greeters = new greeterMaker();
 // let greeter2: Greeters = new greeterMaker();
 // console.log(greeter2.greet());
-
-
 
 // class Greeter {
 //   static standardGreeting = "Hello, there";
@@ -321,52 +293,37 @@ let greeter2: Greeters = new greeterMaker();
 // let greeter2: Greeter = new greeterMaker();
 // console.log(greeter2.greet());
 
-
-
-
-
-
-
-
-
-
 //接口继承类
 class Control {
   private state: any;
 }
 interface SelectableControl extends Control {
-  select(): void
+  select(): void;
 }
 
 class Button extends Control implements SelectableControl {
-  select() { }
+  select() {}
 }
 
 class TextBox extends Control {
-  select() { }
+  select() {}
 }
-
 
 class Image extends Control implements SelectableControl {
-  select() { }
-
+  select() {}
 }
-
-
-
 
 //泛型类
 interface Lenthwise {
-  length: number
+  length: number;
 }
 function loggingIdentity<T extends Lenthwise>(arg: T): T {
-  console.log('argd')
-  console.log(arg.length)
-  return arg
+  console.log('argd');
+  console.log(arg.length);
+  return arg;
 }
 
-loggingIdentity({ a: 'cc', length: 3 })
-
+loggingIdentity({ a: 'cc', length: 3 });
 
 // function getProperty<T,K>(obj: T, key: K) {
 //   return obj[key];
@@ -377,7 +334,6 @@ loggingIdentity({ a: 'cc', length: 3 })
 // getProperty(x, "a");
 // getProperty(x, "m");
 
-
 //在泛型里使用类类型
 // function create<T>(c: { new(): T; }): T {
 //   return new c()
@@ -386,7 +342,6 @@ loggingIdentity({ a: 'cc', length: 3 })
 //使用原型属性推断并约束构造函数与类实例的关系
 //类
 
-
 // class ZooKeeper {
 //   nametag: string;
 // }
@@ -394,7 +349,6 @@ loggingIdentity({ a: 'cc', length: 3 })
 // class Animals {
 //   numLegs: number;
 // }
-
 
 // class Lion extends Animals {
 //   keeper: ZooKeeper
@@ -422,7 +376,7 @@ enum Response {
   Yes = 5
 }
 function getSomeValue(): number {
-  return 1
+  return 1;
 }
 // enum E {
 //   B,
@@ -453,10 +407,10 @@ enum E {
   z
 }
 function f(obj: { x: number }) {
-  return obj.x
+  return obj.x;
 }
 
-f(E)
+f(E);
 //常量枚举
 //大多数情况下，枚举是十分有效的方案。 然而在某些情况下需求很严格。
 //1.它们在编译阶段会被删除
@@ -475,31 +429,16 @@ f(E)
 // }
 // // let directions = [Directions.Up, Directions.Down, Directions.Left, Directions.Right]
 
-
-
-
-
-
-
-
-
-export class Hello extends React.Component<HelloProps, {}>{
-
+export class Hello extends React.Component<HelloProps, {}> {
   printLabel = (labelObj: labelvalue) => {
-    return labelObj.label
-  }
+    return labelObj.label;
+  };
   createSquare = (config: SquareConfig): { color: string; area: number } => {
-    let newSquare = { color: 'ssss', area: 100, }
+    let newSquare = { color: 'ssss', area: 100 };
     return newSquare;
-  }
-
-
+  };
 
   render() {
-    return <h1>hello</h1>
+    return <h1>hello</h1>;
   }
 }
-
-
-
-
