@@ -7,7 +7,7 @@ module.exports = {
   },
   extends: [
     'eslint-config-alloy/react',
-    'eslint-config-alloy/typescript',
+    // 'eslint-config-alloy/typescript',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -18,13 +18,13 @@ module.exports = {
     },
     sourceType: 'module'
   },
-  plugins: ['react','@typescript-eslint'
+  plugins: ['react', '@typescript-eslint'
   ],
   root: true,
   rules: {
     //缩进4空格
     indent: [
-      'error',
+      'off',
       4,
       {
         SwitchCase: 1
@@ -39,7 +39,7 @@ module.exports = {
     //强制分号
     semi: ['error', 'always'
     ],
-    "@typescript-eslint/rule-name": "error",
+    // "@typescript-eslint/rule-name": "error",
     //防止错误for循环
     'for-direction': 'error',
     //不许更改const定义过的变量
@@ -120,7 +120,10 @@ module.exports = {
     //遍历元素必须要给key
     'react/jsx-key': 'error',
     //不许传入重复的Props
-    'react/jsx-no-duplicate-props': 'error'
+    'react/jsx-no-duplicate-props': 'error',
+    "no-empty-function": "off",
+    "no-useless-constructor": "off",
+    "new-cap": "off",
   },
   settings: {
     react: {
