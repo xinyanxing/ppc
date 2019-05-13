@@ -23,8 +23,9 @@ module.exports = {
   root: true,
   rules: {
     //缩进4空格
+    "react/jsx-indent": "warn",
     indent: [
-      'off',
+      'warn',
       4,
       {
         SwitchCase: 1
