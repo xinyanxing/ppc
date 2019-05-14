@@ -23,9 +23,9 @@ module.exports = {
   root: true,
   rules: {
     //缩进4空格
-    "react/jsx-indent": "warn",
+    "react/jsx-indent": "off",
     indent: [
-      'warn',
+      'off',
       4,
       {
         SwitchCase: 1
@@ -111,7 +111,7 @@ module.exports = {
     //启动react 组件变量使用,
     'react/jsx-uses-vars': 'error',
     //跨行标签必须对齐 子元素缩进
-    'react/jsx-closing-tag-location': 'error',
+    'react/jsx-closing-tag-location': 'off',
     //多行闭合标签 必须新起一行
     'react/jsx-closing-bracket-location': 'error',
     //无内容必须自闭合
