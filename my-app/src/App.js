@@ -10,7 +10,7 @@ function App() {
         framework="ssss"
         curColor="dddfffffff"
       />
-      dddddd
+      ddddddoooo
     </div>
   );
 }
