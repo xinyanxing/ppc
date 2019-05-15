@@ -5,7 +5,7 @@ import { Hello } from './compents/test';
 function App() {
   return (
     <div className="App">
-      sfffssssfdsa nopush:dddd master
+      sfffssssfdsa nopush:dddd masterddddppppp
       <Hello
         compiler={['ddd', 'mmmfffmd']}
         framework="ssss"
