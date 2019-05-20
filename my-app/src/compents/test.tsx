@@ -449,6 +449,6 @@ export class Hello extends React.Component<HelloProps, {}> {
   };
 
   render() {
-    return <h1>hello</h1>;
+    return <h1>组件模板</h1>;
   }
 }
