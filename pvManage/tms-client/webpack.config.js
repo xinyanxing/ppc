@@ -123,7 +123,7 @@ class WebpackConfig {
 
     get resolve() {
         return {
-            extensions: ['.js', '.jsx', '.scss', '.css', 'less'],
+            extensions: ['.ts', '.tsx', '.js', '.jsx', '.scss', '.css', 'less'],
             alias: {
                 src: resolve('./src'),
                 model: resolve('./src/model'),
@@ -165,10 +165,10 @@ class WebpackConfig {
             noInfo: true,
             quiet: true,
             clientLogLevel: 'none',
-            overlay: globalConfig.needOverLay ?  {
+            overlay: globalConfig.needOverLay ? {
                 warnings: true,
                 errors: true
-            }:false,
+            } : false,
             proxy
         };
     }
@@ -189,7 +189,7 @@ class WebpackConfig {
         const common = {
             rules: [
                 {
-                    test: /\.jsx?$/,
+                    test: /\.(j|t)sx?$/,
                     use: [
                         {
                             loader: 'babel'
