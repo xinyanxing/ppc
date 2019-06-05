@@ -5,42 +5,30 @@ module.exports = {
     es6: true,
     node: true
   },
-  extends: [
-    'eslint-config-alloy/react',
-    // 'eslint-config-alloy/typescript',
-  ],
-  parser: '@typescript-eslint/parser',
+  parser: 'babel-eslint',
   parserOptions: {
-    "project": "./tsconfig.json",
     ecmaFeatures: {
       experimentalObjectRestSpread: true,
       jsx: true
     },
     sourceType: 'module'
   },
-  plugins: ['react', '@typescript-eslint'
-  ],
+  plugins: ['react'],
   root: true,
   rules: {
     //缩进4空格
-    "react/jsx-indent": "off",
     indent: [
-      'off',
+      'error',
       4,
       {
         SwitchCase: 1
       }
     ],
+
     //强制单引号 可以使用es6模板语法
-    quotes: ['error', 'single',
-      {
-        allowTemplateLiterals: true
-      }
-    ],
+    quotes: ['error', 'single', { allowTemplateLiterals: true }],
     //强制分号
-    semi: ['error', 'always'
-    ],
-    // "@typescript-eslint/rule-name": "error",
+    semi: ['error', 'always'],
     //防止错误for循环
     'for-direction': 'error',
     //不许更改const定义过的变量
@@ -56,7 +44,7 @@ module.exports = {
     //不准比较自身
     'no-self-compare': 'error',
     // 变量声明了 必须使用
-    'no-unused-vars': 0, //['error', { vars: 'all', args: 'after-used' }],
+    'no-unused-vars': 0,//['error', { vars: 'all', args: 'after-used' }],
     //禁止对参数重新赋值
     'no-param-reassign': 'error',
     //禁止使用var
@@ -70,11 +58,7 @@ module.exports = {
     //不许在变量声明前使用
     'no-use-before-define': 'error',
     //箭头函数前后要有空格
-    'arrow-spacing': ['error',
-      {
-        before: true, after: true
-      }
-    ],
+    'arrow-spacing': ['error', { before: true, after: true }],
     //不许对象内有重复的key
     'no-dupe-keys': 'error',
     //强制jsx为双引号
@@ -111,7 +95,7 @@ module.exports = {
     //启动react 组件变量使用,
     'react/jsx-uses-vars': 'error',
     //跨行标签必须对齐 子元素缩进
-    'react/jsx-closing-tag-location': 'off',
+    'react/jsx-closing-tag-location': 'error',
     //多行闭合标签 必须新起一行
     'react/jsx-closing-bracket-location': 'error',
     //无内容必须自闭合
@@ -121,10 +105,7 @@ module.exports = {
     //遍历元素必须要给key
     'react/jsx-key': 'error',
     //不许传入重复的Props
-    'react/jsx-no-duplicate-props': 'error',
-    "no-empty-function": "off",
-    "no-useless-constructor": "off",
-    "new-cap": "off",
+    'react/jsx-no-duplicate-props': 'error'
   },
   settings: {
     react: {
