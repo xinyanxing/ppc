@@ -3,3 +3,5 @@ __tests__
 config
 public
 template
+*.ts
+*.tsx
