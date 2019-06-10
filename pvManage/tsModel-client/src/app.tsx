@@ -51,12 +51,10 @@ export class App extends React.Component<IProps, Istate> {
             ].concat(extraBreadcrumbItems);
 
             return (
-                <div className="demo">
-                    <Breadcrumb>{breadcrumbItems}</Breadcrumb>
-                </div>
+                <Breadcrumb>{breadcrumbItems}</Breadcrumb>
             );
         });
-        return (<Home></Home>);
+        return <Home />;
     }
     render(): any {
         return (
@@ -90,9 +88,7 @@ export class App extends React.Component<IProps, Istate> {
                     <Layout>
                         <Header style={{ background: '#fff', padding: 0 }} />
                         <Content style={{ margin: '0 16px' }}>
-                            <Breadcrumb>
-                                {this.extraBreadcrumbItems()}
-                            </Breadcrumb>
+                            {this.extraBreadcrumbItems()}
                             {renderRoutes(routes, this.props)}
                         </Content>
                         <Footer style={{ textAlign: 'center' }}>
