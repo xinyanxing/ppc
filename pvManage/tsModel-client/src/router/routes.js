@@ -1,13 +1,12 @@
 import { RouteChildren } from './RouteChildren';
 
 import { Options } from '../view/options/inidex.tsx';
-import { LayoutIndex } from '../view/options/layoutIndex.tsx';
+import LayoutIndex from '../view/options/layoutIndex.tsx';
 import { Options2 } from '../view/options/Options2.tsx';
 import { Options3 } from '../view/options/Options3.tsx';
 
 
 //路由模板链接d
-
 const routes = [
     {
         path: '/',

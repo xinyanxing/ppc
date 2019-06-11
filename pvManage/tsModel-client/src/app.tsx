@@ -6,6 +6,7 @@ import { Layout, Menu, Icon, Breadcrumb } from 'antd';
 import { routes } from 'router/routes';
 import _ from 'lodash';
 import { renderRoutes } from 'router/renderRoutes';
+import { headlistService } from 'src/service/layout';
 
 import 'antd/dist/antd.min.css';
 import 'tms-common-role-menu/lib/app.css';
@@ -17,12 +18,39 @@ interface IProps {
 }
 interface Istate {
     collapsed: Boolean;
+    headlist: any[];
 }
 export class App extends React.Component<IProps, Istate> {
     state = {
         collapsed: false,
+        headlist: [],
     };
 
+    componentDidMount() {
+        this.init();
+    }
+    init = () => {
+        // headlistService.getheadlist().then((value) => {
+        //     (value.Data).unshift({ Id: '0', Name: '全部' });
+
+        //     // this.setState({
+        //     //     headlist: value.Data,
+        //     // });
+        // });
+        this.setState((state, props) => {
+            console.log(state);
+
+            this.setState((state, props) => {
+                console.log(state);
+
+                state = {
+                    ...state, ...{ headlist: ['a'] },
+                };
+                // state['headlist'] = value.Data;
+                return state;
+            });
+        });
+    }
     onCollapse = (collapsed: Boolean) => {
         this.setState({ collapsed });
     }
@@ -56,18 +84,30 @@ export class App extends React.Component<IProps, Istate> {
         });
         return <Home />;
     }
+    curlocation = (curUrl: string): string => {
+        let curpathName = _.join(_.compact(_.drop(_.split(curUrl, '/'), 2)), '/');
+        return `/${curpathName}`;
+    }
+    openKeysArray = (curPathActive: string): string[] => {
+        let curparentPath = _.compact(_.split(curPathActive, '/'));
+        if (curparentPath.length === 0) { return []; }
+        let newarray = (_.filter(routes, (v) => v.path === `/${curparentPath[0]}`))[0];
+        return [newarray.path];
+    }
     render(): any {
+        let curUrl = document.location.pathname;
+        let curPathName = this.curlocation(curUrl);
         return (
             <Router history={history} >
                 <Layout style={{ minHeight: '100vh' }}>
-                    <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
+                    <Sider collapsed={this.state.collapsed} onCollapse={this.onCollapse} defaultCollapsed={true}>
                         <div className="logo" />
-                        <Menu theme="dark" defaultSelectedKeys={['首页']} mode="inline">
+                        <Menu theme="dark" defaultSelectedKeys={[curPathName]} mode="inline" defaultOpenKeys={this.openKeysArray(curPathName)}>
                             {
                                 _.map(routes, (v, k) => {
                                     return (v.routes ?
                                         <SubMenu
-                                            key={k}
+                                            key={v.path}
                                             title={
                                                 <span>
                                                     <Icon type="user" />
@@ -77,21 +117,21 @@ export class App extends React.Component<IProps, Istate> {
                                         >
                                             {
                                                 _.map(v.routes, (s) => {
-                                                    return (<Menu.Item key={s.linkName}> <NavLink to={s.path}>{s.linkName}</NavLink></Menu.Item>);
+                                                    return (<Menu.Item key={s.path}> <NavLink to={s.path}>{s.linkName}</NavLink></Menu.Item>);
                                                 })
                                             }
-                                        </SubMenu> : <Menu.Item key={v.linkName}> <NavLink to={v.path}>{v.linkName || ''}</NavLink></Menu.Item>);
+                                        </SubMenu> : <Menu.Item key={v.path}> <NavLink to={v.path}> <Icon type="user" />{v.linkName || ''}</NavLink></Menu.Item>);
                                 })
                             }
                         </Menu>
                     </Sider>
                     <Layout>
                         <Header style={{ background: '#fff', padding: 0 }} />
-                        <Content style={{ margin: '0 16px' }}>
+                        <Content style={{ margin: '10px 16px', background: '#fff', padding: '15px 20px' }}>
                             {this.extraBreadcrumbItems()}
                             {renderRoutes(routes, this.props)}
                         </Content>
-                        <Footer style={{ textAlign: 'center' }}>
+                        <Footer style={{ textAlign: 'center', fontSize: '12px', lineHeight: '12px' }}>
                             <p>COPYRIGHT © 2017 嘉兴太美医疗科技有限公司 版权所有 浙ICP备13033914号</p>
                             <p>浙公网安备 33049802000047</p>
                         </Footer>
