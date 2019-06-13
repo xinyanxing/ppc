@@ -1,5 +1,5 @@
 config/**
 *.test.js
 src/serviceWorker.js
-*.ts 
-*.tsx
+*.js
+*.jsx

@@ -1,10 +1,11 @@
 const db = require('../config/db');
 const show = () => {
     return new Promise((resolve, reject) => {
-        db.query('select * from user', (err, rows) => {
+        db.query('select * from test', (err, rows) => {
             if (err) {
                 reject(err);
             }
+
             resolve(rows);
         });
     });

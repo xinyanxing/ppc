@@ -1,20 +1,34 @@
 let mysql = require("mysql")
+
 let pool = mysql.createPool({
   host: "localhost",
   user: "root",
-  password: "11111",
-  database: "dbtest"
-})//数据库连接配置
+  password: "111111",
+  database: "testDemo"
+});//数据库连接配置
 
-function query(sql, callback) {
-  console.log('sql')
+let query = function (sql, callback) {
+  console.log('callback......')
   console.log(sql)
-  pool.getConnection(function (err, connection) {
-    connection.query(sql, function (err, rows) {
-      callback(err, rows)
-      connection.release()
-    })
-  })
-}//对数据库进行增删改查操作的基础
+  pool.getConnection(function (err, conn) {
+    console.log('callback.ssss.....')
+    console.log(conn)
+    if (err) {
+      callback(err, null, null);
+    } else {
+      conn.query(sql, function (err, results, fields) {
+        //释放连接  
+        conn.release();
+        //事件驱动回调  
+        callback(err, results, fields);
+      });
+    }
+  });
+};
+const shownow = () => {
+  console.log('aaaaaaaaaa')
+  return { 'aa': 'bb' }
+};
+exports.query = query;
 
-export { query }
+

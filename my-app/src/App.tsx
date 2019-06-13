@@ -1,9 +1,10 @@
+import { Breadcrumb, Icon, Layout, Menu } from 'antd';
+import 'antd/dist/antd.css';
 import React from 'react';
 import './App.css';
-import { Hello } from './compents/test';
 import { Button } from './compents/button';
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
-import 'antd/dist/antd.css';
+import { Hello } from './compents/test';
+import _ from 'lodash';
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 function App() {
@@ -99,4 +100,4 @@ function App() {
   );
 }
 
-export default App;
+export { App };

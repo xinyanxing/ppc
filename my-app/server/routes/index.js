@@ -1,19 +1,18 @@
 const express = require('express');
 const router = express.Router();
-console.log('roueter');
-console.log(router);
+const userss = require('../useres');
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
     res.render('index', { title: 'Express' });
 });
 
-router.get('/show', (req, res, next) => {
-    console.log(req);
-    console.log('show');
+router.get('/show', async (req, res, next) => {
     try {
-    // const result = await require('../services/users').show();
-    // res.send(result);
-        res.send('ok');
+        const result = await require('../useres').show();
+        console.log('///////result');
+        console.log(result);
+        res.send(result);
     } catch (e) {
         res.send(e);
     }
