@@ -1,4 +1,5 @@
 import React from 'react';
+import { button } from './button';
 interface ButtonPropsTypes {
   size: string;
 }
