@@ -1,16 +1,52 @@
 'user strict'
+const glob = require('glob')
 const path = require('path')
 const webpack = require('webpack');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin'); //压缩css
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); //提取css
 const HtmlWebpackPlugin = require('html-webpack-plugin')  //压缩html
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');  //清理构建目录  v3
+const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin')
 
+
+const setMPA = () => {
+    let entry = {};
+    let htmlWebpackPlugins = [];
+    const entryFiles = glob.sync(path.join(__dirname, './src/*/index.js'));
+
+    Object.keys(entryFiles).map((index) => {
+        const entryFileSingle = entryFiles[index]
+        const match = entryFileSingle.match(/src\/(.*)\/index\.js/);
+        const pageName = match && match[1]
+        entry[pageName] = entryFileSingle
+        htmlWebpackPlugins.push(
+            new HtmlWebpackPlugin({
+                template: path.join(__dirname, `./src/${pageName}/index.html`),
+                filename: `${pageName}.html`,
+                chunks: ['vendors', pageName],
+                inject: true,
+                minify: {
+                    html5: true,
+                    collapseWhitespace: true,
+                    preserveLineBreaks: false,
+                    minifyCSS: true,
+                    minifyJS: true,
+                    removeComments: false
+                }
+            })
+        );
+
+    })
+    return {
+        entry,
+        htmlWebpackPlugins
+    }
+
+
+}
+const { entry, htmlWebpackPlugins } = setMPA()
 module.exports = {
-    entry: {
-        index: './src/index.js',
-        search: './src/search.js'
-    },
+    entry: entry,
     //无论多入口还是单入口output只有一个 占位符【name]
     //webpack 原生只支持js json
     output: {
@@ -20,7 +56,6 @@ module.exports = {
     mode: 'production',
     module: {
         rules: [
-
             {
                 test: /.js$/,
                 use: 'babel-loader'
@@ -64,35 +99,35 @@ module.exports = {
         }),
         //清理构建目录
         new CleanWebpackPlugin(),
-        //压缩html
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, `./src/index.html`),
-            filename: `index.html`,
-            chunks: ['index'],
-            inject: true,
-            minify: {
-                html5: true,
-                collapseWhitespace: true,
-                preserveLineBreaks: false,
-                minifyCSS: true,
-                minifyJS: true,
-                removeComments: false
-            }
-        }),
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, `./src/search.html`),
-            filename: `search.html`,
-            chunks: ['search'],
-            inject: true,
-            minify: {
-                html5: true,
-                collapseWhitespace: true,
-                preserveLineBreaks: false,
-                minifyCSS: true,
-                minifyJS: true,
-                removeComments: false
-            }
-        }),
+        //拆分公共包 一
+        // new HtmlWebpackExternalsPlugin({
+        //     externals: [
+        //         {
+        //             module: 'react',
+        //             entry: 'https://11.url.cn/now/lib/16.2.0/react.min.js',
+        //             global: 'React',
+        //         },
+        //         {
+        //             module: 'react-dom',
+        //             entry: 'https://11.url.cn/now/lib/16.2.0/react-dom.min.js',
+        //             global: 'ReactDom',
+        //         },
+        //     ]
+        // })
 
-    ],
+    ].concat(htmlWebpackPlugins), //压缩html
+    //拆分公共包 一
+    optimization: {
+        splitChunks: {
+            minSize: 0,
+            cacheGroups: {
+                commons: {
+                    test: /react|react-dom/,
+                    name: 'vendors',
+                    chunks: 'all',
+                    minChunks: 2
+                }
+            }
+        }
+    },
 }

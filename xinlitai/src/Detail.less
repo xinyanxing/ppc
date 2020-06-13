@@ -1,0 +1,186 @@
+.detail{
+  .content{
+    box-sizing: border-box;
+    padding-bottom: 80px;
+    .red{
+      color: red;
+    }
+    .list-title{
+      color: #0AA3B5;
+      background-color: #fff;
+      display: inline-block;
+      margin: 0 10px;
+      padding: 8px 10px;
+      padding-bottom: 2px;
+      font-size: 15px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+
+    }
+    .list{
+      margin-bottom: 15px;
+      .item:last-child .inner{
+        border-bottom: 0;
+      }
+      .item.add{
+        text-align: center;
+        color: #0AA3B5;
+        cursor: pointer;
+        font-size: 17px;
+        line-height: 2.5;
+        background-color: #fff;
+        vertical-align: middle;
+        align-items: center;     
+      }
+      .item{
+        background-color: #fff;   
+        padding-left: 15px;  
+        box-sizing: border-box;   
+        position: relative;        
+        overflow: hidden;
+        .error{
+          color:#f00;
+          padding-left:36%;
+        }
+        .inner{     
+          font-size: 17px;
+          padding:8px 0;    
+          background-color: #fff;
+          vertical-align: middle;
+          align-items: center;     
+          display: flex;
+          border-bottom: 1px solid #E8E8E8;
+        }
+        .label{
+          width: 36%;
+        }
+        .merge.control > *{
+          width: 43%;          
+          border-right: 1px solid #E8E8E8;
+          margin-right: 3%;
+        }
+        .merge.control > *:last-child{
+          border-right: 0;
+        }
+        .control{
+          display: flex;
+          flex:1;
+          padding-right: 6px;
+
+          ::placeholder{
+            color: #aaa;
+          }
+          >div{
+            width: 100%;
+          }
+          .select-input{
+            width: 100%;
+            span{
+              color: #aaa;
+            }
+            .am-icon{
+              float: right;
+            }
+          }
+          .date-input{
+            width: 100%;
+            span{
+              color: #aaa;
+            }
+          }
+          >input{
+            flex:1;
+            color: #000;
+            font-size: 17px;
+            appearance: none;
+            width: 100%;
+            padding: 2px 0;
+            border: 0;
+            background-color: transparent;
+            line-height: 1;
+            box-sizing: border-box;
+          }
+          select{
+            flex:1;
+            color: #000;
+            font-size: 17px;
+            appearance: none;
+            width: 100%;
+            padding: 2px 0;
+            border: 0;
+            background-color: transparent;
+            line-height: 1;
+            box-sizing: border-box;
+            option[value=""][disabled] {
+              display: none;
+            }
+            option {
+              color: black;
+            }
+          }
+          select:required:invalid {
+            color: #aaa;
+          }
+
+          .radio-group{
+            flex:1;
+            width: 100%;
+            label{
+              vertical-align: middle;
+              display: inline-block;
+              margin-right: 20px;
+              input{
+                display: inline;
+                margin-right: 3px;
+              }
+            }
+            label:last-child{
+              margin-right: 0;
+            }
+          }
+
+        }
+        .control[error] select{
+          color: red;
+        }
+        .control[error] .date-input span{
+          color: red !important;
+        }
+        .control[error] .select-input span{
+          color: red !important;
+        }
+
+        .control[error] select:empty{
+          color: red;
+        }
+        .control[error] ::placeholder{
+          color: red;
+        }
+      }
+
+    } 
+  }
+  
+  .footer{
+    box-sizing: border-box;
+    width: 100%;
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    padding: 10px;
+    display: flex;
+    .am-button{
+      width: 30%;
+      display: inline-block;
+      margin-right: 10px;
+    }
+    .am-button.am-button-primary{
+      flex: 1;
+      width: 100%;
+      margin-right: 0;
+      background-color: #0AA3B5;
+    }
+  }
+}
